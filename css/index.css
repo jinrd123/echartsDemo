@@ -183,3 +183,18 @@ header .showTime {
   line-height: 0.5rem;
   padding-top: 0.125rem;
 }
+.map {
+  position: relative;
+  height: 10.125rem;
+}
+.map .map1 {
+  width: 6.475rem;
+  height: 6.475rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url(../images/map.png);
+  background-size: 100% 100%;
+  opacity: 0.3;
+}

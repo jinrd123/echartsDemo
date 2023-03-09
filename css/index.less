@@ -191,3 +191,20 @@ header {
     }
   }
 }
+
+.map {
+    position: relative;
+    height: 10.125rem;
+    .map1 {
+      width: 6.475rem;
+      height: 6.475rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: url(../images/map.png);
+      //  设置背景图片完全等于容器大小（随容器缩放而缩放）
+      background-size: 100% 100%;
+      opacity: 0.3;
+    }
+}
