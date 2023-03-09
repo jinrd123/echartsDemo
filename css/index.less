@@ -193,18 +193,38 @@ header {
 }
 
 .map {
-    position: relative;
-    height: 10.125rem;
-    .map1 {
-      width: 6.475rem;
-      height: 6.475rem;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: url(../images/map.png);
-      //  设置背景图片完全等于容器大小（随容器缩放而缩放）
-      background-size: 100% 100%;
-      opacity: 0.3;
+  position: relative;
+  height: 10.125rem;
+  .map1 {
+    width: 6.475rem;
+    height: 6.475rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(../images/map.png);
+    //  设置背景图片完全等于容器大小（随容器缩放而缩放）
+    background-size: 100% 100%;
+    opacity: 0.3;
+  }
+  .map2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8.0375rem;
+    height: 8.0375rem;
+    background: url(../images/lbx.png);
+    animation: rotate1 15s linear infinite;
+    opacity: 0.6;
+    background-size: 100% 100%;
+  }
+  @keyframes rotate1 {
+    form {
+      transform: translate(-50%, -50%) rotate(0deg);
     }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
 }
