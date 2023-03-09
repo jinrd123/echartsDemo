@@ -218,3 +218,30 @@ header .showTime {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
+.map .map3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 7.075rem;
+  height: 7.075rem;
+  background: url(../images/jt.png);
+  animation: rotate2 10s linear infinite;
+  opacity: 0.6;
+  background-size: 100% 100%;
+}
+@keyframes rotate2 {
+  form {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg);
+  }
+}
+.map .chart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10.125rem;
+}
