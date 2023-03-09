@@ -3,6 +3,14 @@
   padding: 0;
   box-sizing: border-box;
 }
+li {
+  list-style: none;
+}
+/* 声明字体*/
+@font-face {
+  font-family: electronicFont;
+  src: url(../font/DS-DIGIT.TTF);
+}
 body {
   height: 1.25rem;
   background: url(../images/bg.jpg) no-repeat top center;
@@ -100,27 +108,72 @@ header {
       }
     }
     h2 {
-        height: 0.6rem;
+      height: 0.6rem;
+      color: #fff;
+      line-height: 0.6rem;
+      text-align: center;
+      font-size: 0.25rem;
+      font-weight: 400;
+      a {
         color: #fff;
-        line-height: 0.6rem;
-        text-align: center;
-        font-size: 0.25rem;
-        font-weight: 400;
-        a {
-          color: #fff;
-          text-decoration: none;
-          margin: 0 0.125rem;
-        }
+        text-decoration: none;
+        margin: 0 0.125rem;
       }
-      .chart {
-        height: 3rem;
-        background-color: red;
-      }
+    }
+    .chart {
+      height: 3rem;
+      background-color: red;
+    }
   }
 }
 
 // no数字模块
 .no {
-    background: rgba(101, 132, 226, 0.1);
-    padding: 0.1875rem;
+  background: rgba(101, 132, 226, 0.1);
+  padding: 0.1875rem;
+  .no-hd {
+    position: relative;
+    border: 1px solid rgba(25, 186, 139, 0.17);
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      width: 30px;
+      height: 10px;
+      border-top: 2px solid #02a6b5;
+      border-left: 2px solid #02a6b5;
+    }
+    &::after {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      content: "";
+      width: 30px;
+      height: 10px;
+      border-right: 2px solid #02a6b5;
+      border-bottom: 2px solid #02a6b5;
+    }
+    ul {
+      display: flex;
+      li {
+        position: relative;
+        flex: 1;
+        line-height: 1rem;
+        font-size: 0.875rem;
+        color: #ffeb7b;
+        text-align: center;
+        font-family: "electronicFont";
+        &::after {
+          content: "";
+          position: absolute;
+          top: 25%;
+          right: 0;
+          height: 50%;
+          width: 1px;
+          background: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+  }
 }
