@@ -216,8 +216,148 @@
   };
 
   myChart.setOption(option);
-  
+
   window.addEventListener("resize", function () {
     myChart.resize();
+  });
+})();
+
+// 折线图1模块制作
+(function () {
+  // 折线图所依赖的数据
+  const yearData = [
+    {
+      year: "2020", // 年份
+      data: [
+        // 两个数组是因为有两条线
+        [24, 40, 101, 134, 90, 230, 210, 230, 120, 230, 210, 120],
+        [40, 64, 191, 324, 290, 330, 310, 213, 180, 200, 180, 79],
+      ],
+    },
+    {
+      year: "2021", // 年份
+      data: [
+        // 两个数组是因为有两条线
+        [123, 175, 112, 197, 121, 67, 98, 21, 43, 64, 76, 38],
+        [143, 131, 165, 123, 178, 21, 82, 64, 43, 60, 19, 34],
+      ],
+    },
+  ];
+
+  // 1. 实例化对象
+  const  myChart = echarts.init(document.querySelector(".line .chart"));
+  // 2.指定配置
+  const option = {
+    // 对应series中两个对象，即两条线的颜色
+    color: ["#00f2f1", "#ed3f35"],
+    tooltip: {
+      trigger: "axis",
+    },
+
+    // 图例组件相关配置
+    legend: {
+      // 如果series 对象有 name 值，即series自动分类了，所以这里可以省略data属性
+      // 修改图例组件 文字颜色
+      textStyle: {
+        color: "#4c9bfd",
+      },
+      // 对图例组件进行定位
+      right: "10%",
+    },
+
+    grid: {
+      top: "20%",
+      left: "3%",
+      right: "4%",
+      bottom: "3%",
+
+      // 网格边框相关配置
+      show: true, // 显示边框
+      borderColor: "#012f4a", // 边框颜色
+
+      containLabel: true, // 计算大小时包含标签文字在内
+    },
+
+    xAxis: {
+      type: "category",
+      boundaryGap: false,
+      data: [
+        "1月",
+        "2月",
+        "3月",
+        "4月",
+        "5月",
+        "6月",
+        "7月",
+        "8月",
+        "9月",
+        "10月",
+        "11月",
+        "12月",
+      ],
+      axisTick: {
+        show: false, // 去除刻度线
+      },
+      axisLabel: {
+        // show: false, // 不显示坐标轴上的文字标签
+        color: "#4c9bfd", // 文本颜色
+      },
+      axisLine: {
+        show: false, // 去除轴线
+      },
+    },
+    yAxis: {
+      type: "value",
+      axisTick: {
+        show: false, // 去除刻度线
+      },
+      axisLabel: {
+        color: "#4c9bfd", // 文本颜色
+      },
+      axisLine: {
+        show: false, // 去除轴线
+      },
+      // 设置y轴分割线
+      splitLine: {
+        lineStyle: {
+          color: "#012f4a", // 分割线颜色
+        },
+      },
+    },
+    series: [
+      {
+        name: "新增粉丝",
+        // line类型的series对象，即在图标上以线条的形式呈现
+        type: "line",
+        // true 可以让我们的折线显示带有弧度
+        smooth: true,
+        data: yearData[0].data[0],
+      },
+      {
+        name: "新增游客",
+        type: "line",
+        smooth: true,
+        data: yearData[0].data[1],
+      },
+    ],
+  };
+
+  // 3. 把配置给实例对象
+  myChart.setOption(option);
+  // 4. 让图表跟随屏幕自动的去适应
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+
+  // 5. 点击 2020/2021 切换echarts数据
+
+  const aTags = document.querySelectorAll(".line a");
+  aTags.forEach((aTag, index) => {
+    aTag.addEventListener("click", () => {
+        option.series.forEach((seriesItem, seriesIndex) => {
+            seriesItem.data = yearData[index].data[seriesIndex];
+        })
+        myChart.setOption(option); // 调用setOption方法重新渲染
+    })
   });
 })();
