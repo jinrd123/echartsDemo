@@ -254,3 +254,18 @@ header {
     height: 10.125rem;
   }
 }
+
+/* 约束屏幕尺寸 */
+// 因为手机淘宝团队的flexible.js会实时更新html.fontSize
+// 但是我们的echarts绘图过程中很多大小相关的属性，比如字体，柱子或者拐点等item的大小都是写死的（相当于静态布局），所以页面整体缩小的同时这些元素并不会随之缩小，就出现显示问题
+// 我们使用媒体查询把页面限制在一个安全范围内，所谓安全范围，即echarts图表中大小写死的元素显示效果可以接受的范围
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 42px !important;
+  }
+}
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 80px !important;
+  }
+}
