@@ -378,7 +378,7 @@
     tooltip: {
       trigger: "axis",
     },
-    color: ["red", 'black'],
+    color: ["red", "black"],
     legend: {
       top: "0%",
       data: ["邮件营销", "联盟广告", "视频广告", "直接访问", "搜索引擎"],
@@ -567,6 +567,74 @@
     ],
   };
   myChart.setOption(option);
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+})();
+
+// 饼形图
+/**
+ *  1. 对于饼图来说，series数组里一般只有一个series对象，这个series.data数组里的对象格式为：
+ *      {
+ *          value: xxx,
+ *          name: xxx
+ *      }
+ *  2. 曾经折线图与柱形图的legend的data可以省略，根据series对象的name自动生成
+ *     但是饼图只有一个series对象，其图例根据这个series对象的data数组里的name生成
+ */
+(function () {
+  const myChart = echarts.init(document.querySelector(".pie .chart"));
+  const option = {
+    color: ["#065aab", "#066eab", "#0682ab", "#0696ab", "#06a0ab"],
+    tooltip: {
+      trigger: "item", // 对于饼图来说，tooltip的触发方式即为item，而非axis
+      formatter: "{a} <br/>{b}: {c} ({d}%)", // 设置提示框的提示内容
+    },
+
+    // 图例相关配置
+    legend: {
+      bottom: "0%", // 图例位置相关
+      // 图例小图标的大小
+      itemWidth: 10,
+      itemHeight: 10,
+      // 图例文字的样式 —— 图例文字对应series.data对象的name属性值
+      textStyle: {
+        color: "rgba(255,255,255,.5)",
+        fontSize: "12",
+      },
+    },
+    series: [
+      {
+        name: "年龄分布",
+        type: "pie",
+        // 这个radius可以修改饼图的大小
+        // radius 第一个值是内圆的半径 第二个值是外圆的半径（当内圆半径设置为"0%"时，就不是环形了，而是一个实心圆）
+        radius: ["40%", "60%"],
+        // center调整饼图位置
+        center: ["50%", "45%"],
+        avoidLabelOverlap: true, // 避免label重叠在一起
+        // 图形上的文字
+        label: {
+          show: false,
+          position: "inline", // inline、center等取值控制label的位置
+        },
+        // 链接文字和图形的线是否显示
+        labelLine: {
+          show: false,
+        },
+        data: [
+          { value: 1, name: "0岁以下" },
+          { value: 4, name: "20-29岁" },
+          { value: 2, name: "30-39岁" },
+          { value: 2, name: "40-49岁" },
+          { value: 1, name: "50岁以上" },
+        ],
+      },
+    ],
+  };
+
+  myChart.setOption(option);
+  
   window.addEventListener("resize", function () {
     myChart.resize();
   });
