@@ -36,6 +36,12 @@
           "社交行业",
           "金融行业",
         ],
+        /**
+         * 坐标轴相关配置项辨析
+         *  1、axisTick: 坐标轴上的刻度 —— 坐标轴上的点（线头）（tick: 刻度）
+         *  2、axisLabel: 刻度标签 —— 对应data配置项里的数据
+         *  3、axisLine: 坐标轴线 —— 坐标轴本身那条线
+         */
         axisTick: {
           alignWithLabel: true, // 保证坐标轴上的刻度线与标签对齐（boundaryGap: true时生效）
         },
