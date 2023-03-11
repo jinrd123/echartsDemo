@@ -24,7 +24,7 @@
       top: "10px",
       right: "0%",
       bottom: "4%",
-      containLabel: true, 
+      containLabel: true,
     },
 
     // x轴相关配置
@@ -59,7 +59,7 @@
         axisLine: {
           show: false,
         },
-        boundaryGap: true // x坐标轴上第一列数据是否与y轴有间隙
+        boundaryGap: true, // x坐标轴上第一列数据是否与y轴有间隙
       },
     ],
     yAxis: [
@@ -102,6 +102,121 @@
   // 3. 把配置项给实例对象
   myChart.setOption(option);
   // 4. 让图表跟随屏幕自动的去适应：屏幕大小变化调用myChart.resize()方法让图标重绘
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+})();
+
+// 右上角横向柱状图
+/**
+ *  实现思路：
+ *  1. yAxis数组里两个对象对应两个y轴，第一个为左侧y轴，第二个就是右侧的y轴；xAxis设置show: false，即不需要x轴
+ *  2. series数组里两个对象对应两套数据信息，第一套对应里面的实心条；第二套对应外面的边框
+ *  3. series对象设置yAxisIndex属性控制两套数据的覆盖性，有点类似于z-index
+ *      1）: 两套数据的yAxisIndex相同，或者不设置，那么每个标签出现并列的两个柱子
+ *      2）: 其中一个series对象的yAxisIndex大，那么就会压住另一个
+ *     所以我们设置边框series的yAxisIndex大，并且itemStyle.color设置为"none"，即透明，这样就能看到下面的实心条
+ *  4. 让实心条上显示一些数据信息，即设置实心条series对象的label
+ */
+(function () {
+  // 一个series对象中，其itemStyle的color属性为函数，可遍历series的data数组，函数接收到一个params对象，通过myColor[params.dataIndex]来使用我们的myColor颜色数据
+  let myColor = ["#1089E7", "#F57474", "#56D0E3", "#F8B448", "#8B78F6"];
+  // 1. 实例化对象
+  let myChart = echarts.init(document.querySelector(".bar2 .chart"));
+  // 2. 指定配置和数据
+  let option = {
+    grid: {
+      top: "10%",
+      left: "22%",
+      bottom: "10%",
+    },
+    // 不显示x轴的相关信息
+    xAxis: {
+      show: false,
+    },
+    yAxis: [
+      {
+        type: "category",
+        inverse: true,
+        data: ["HTML5", "CSS3", "javascript", "VUE", "NODE"],
+        // 不显示y轴的线
+        axisLine: {
+          show: false,
+        },
+        // 不显示刻度
+        axisTick: {
+          show: false,
+        },
+        // 把刻度标签里面的文字颜色设置为白色
+        axisLabel: {
+          color: "#fff",
+        },
+      },
+      {
+        data: [702, 350, 610, 793, 664],
+        inverse: true,
+        // 不显示y轴的线
+        axisLine: {
+          show: false,
+        },
+        // 不显示刻度
+        axisTick: {
+          show: false,
+        },
+        // 把刻度标签里面的文字颜色设置为白色
+        axisLabel: {
+          color: "#fff",
+        },
+      },
+    ],
+    series: [
+      {
+        name: "条",
+        type: "bar",
+        data: [70, 34, 60, 78, 69],
+        yAxisIndex: 0,
+        // 修改第一组柱子的圆角
+        itemStyle: {
+          barBorderRadius: 20,
+          // 此时的color 可以修改柱子的颜色
+          color: function (params) {
+            // params 传进来的是柱子对象
+            // console.log(params);
+            // dataIndex 是当前柱子的索引号
+            return myColor[params.dataIndex];
+          },
+        },
+        // 柱子之间的距离
+        barCategoryGap: 50,
+        //柱子的宽度
+        barWidth: 10,
+        // 显示柱子内的文字
+        label: {
+          show: true,
+          position: "inside",
+          // {c} 会自动的解析为 数据  data里面的数据
+          formatter: "{c}%",
+        },
+      },
+      {
+        name: "框",
+        type: "bar",
+        barCategoryGap: 50,
+        barWidth: 15,
+        yAxisIndex: 1,
+        data: [100, 100, 100, 100, 100],
+        itemStyle: {
+          color: "none",
+          borderColor: "#00c1de",
+          borderWidth: 3,
+          barBorderRadius: 15,
+        },
+      },
+    ],
+  };
+
+  myChart.setOption(option);
+  
   window.addEventListener("resize", function () {
     myChart.resize();
   });
