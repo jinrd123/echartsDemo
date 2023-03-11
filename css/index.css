@@ -120,7 +120,6 @@ header .showTime {
 }
 .mainbox .panel .chart {
   height: 3rem;
-  background-color: red;
 }
 .no {
   background: rgba(101, 132, 226, 0.1);
