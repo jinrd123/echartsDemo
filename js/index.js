@@ -13,13 +13,18 @@
         type: "shadow", // 鼠标悬浮的柱子后面出现阴影，默认为直线，可选为：'line' | 'shadow'
       },
     },
-    // 修改图表的大小
+    // grid配置图表的大小
+    /**
+     * left、top、right、bottom就是指图表距离dom容器边界的距离
+     * containLabel是指计算left、top等距离时是否包含坐标轴上的标签，类似于box-sizing属性的意思
+     * 这里具体来说就是，left: "0%" 即算上y轴上的标签，距离容器左侧百分之零，也就是y轴上的标签会被展示出来，不会被挤掉
+     */
     grid: {
       left: "0%",
       top: "10px",
       right: "0%",
       bottom: "4%",
-      containLabel: true, // 坐标轴上显示数据（标签）
+      containLabel: true, 
     },
 
     // x轴相关配置
